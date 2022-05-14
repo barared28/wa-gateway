@@ -22,7 +22,8 @@ const Home = ({ login, setLogin }) => {
     }, [])
 
     const handleKirimPesan = () => {
-        socket.emit("send_message", { number: nomor, message: pesan, id: 'coba' });
+        const idUser = localStorage.getItem("user-logged") || "";
+        socket.emit("send_message", { number: nomor, message: pesan, id: idUser });
         socket.once("response", (val) => {
             setLog(val.message);
             setTimeout(() => {
